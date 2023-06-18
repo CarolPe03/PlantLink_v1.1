@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantLink</title>
+    <!-- BOOSTRAP CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Scripts de la frase -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- Title -->
+    <title>PlantLink</title>
+    <link rel="stylesheet" href="public/index_estilos/css/themify-icons.css">
+    <!-- Imagen pestaña -->
+    <link rel="icon" href="public/index_estilos/img/core-img/Logo_sin.png">
+    <link rel="stylesheet" href="index_estilos/css/themify-icons2.css">
+    <!-- Estilo del menu -->
+    <link rel="stylesheet" href="public/index_estilos/style.css">
+    <link rel="stylesheet" href="public/index_estilos/css/styles_movil.css">
+    <link rel="stylesheet" href="public/index_estilos/css/animate.css">
+    <!-- Agrega los archivos necesarios de Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.js"></script>
+
+    <style>
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .title-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 75%;
+        }
+
+
+        .logo-wrapper img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal-header h3,
+        .modal-header p {
+            margin: 0;
+        }
+
+        .modal-header p {
+            font-size: 0.9em;
+        }
+
+        .modal-header h3 {
+            color: rgb(13, 8, 88);
+        }
+
+        .google-signin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* añadido para alinear verticalmente los botones */
+            margin-top: 20px;
+        }
+
+        .google-signin-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 50px;
+            margin: 0 10px;
+            border: none;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .google-signin-button:hover {
+            cursor: pointer;
+        }
+
+        .google-signin-button img {
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        .google-signin-button span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #757575;
+            text-align: center;
+        }
+
+        .facebook-button {
+            background-color: #3b5998;
+            color: #fff;
+            font-size: 1rem;
+            padding: 1rem;
+            flex: 1;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem auto;
+            height: 50px;
+
+        }
+
+        .facebook-button:hover {
+            background-color: #2d4373;
+        }
+
+        .button-icon {
+            margin-right: 1rem;
+        }
+
+        .button-icon img {
+            height: 1.2rem;
+        }
+
+        .forgot a {
+            color: #2d4373;
+            text-decoration: underline blue;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <!-- ##### Inicio de Header  ##### -->
+    <header class="header-area">
+
+        <!-- Inicio de Menu -->
+        <div class="academy-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="academyNav">
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="#sobre_nosotros">Sobre nosotros</a></li>
+                                    <li><a href="#plantLink">PlantLink</a></li>
+                                    <li><a href="#plagas">Consejos</a></li>
+                                    <li><a href="#contacto">Contacto</a></li>
+                                    <li><a class="nav-link logged-out" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#signinModal">Ingresar</a></li>
+                                    <li><a class="nav-link logged-out" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#signupModal">Registrarse</a></li>
+                                    <li> <a class="nav-link logged-in" href="#" id="logout">Logout</a> </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Numero de telefono -->
+                        <div class="calling-info">
+                            <div class="call-center">
+                                <a href="tel:+522411980152"><i class="icon-telephone-2"></i> <span>(+52) 241 198 01
+                                        52</span></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Fin de Menu ##### -->
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <ul class="list-group posts">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <div class="title-wrapper">
+                        <h3>Registrate</h3>
+                        <p>Para mayor seguridad, regístrate con Google o Facebook. Aunque implementamos medidas de
+                            seguridad, PlantLink no se hace responsable de posibles ataques informáticos.</p>
+                    </div>
+                    <div class="logo-wrapper">
+                        <img src="public/index_estilos/img/core-img/Logo1.png" width="100%">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <form id="signup-form">
+                        <label for="name"><b>Nombre usuario:</label></b>
+                        <input type="text" id="signup-name" class="form-control mb-3" placeholder="Añade tu nombre de usuario">    
+                        <label for="email"><b>Correo:</label>
+                        <input type="email" id="signup-email" class="form-control mb-3" placeholder="Registra tu correo Gmail, Outlook o Hotmail" required pattern="[a-zA-Z0-9._%+-]+@(gmail|hotmail|outlook)\.com">
+                        <label for="password">Contraseña:</label></b>
+                        <input type="password" id="signup-password" class="form-control mb-3" placeholder="Escribe al menos 5 palabras con números y letras" required>
+                        <!-- <button type="submit" class="btn btn-success w-100 mb-4">Guardar</button>
+                         -->
+                         <div class="modal-footer">
+                            <button type="button" id="btnCancelar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="createUser()" class="btn btn-primary">Guardar</button>
+                          </div>
+                    
+                        
+                        <div class="google-signin" style="margin-top: 0px;">
+                            <button type="button" id="googleLogin" class="google-signin-button">
+                                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                                    alt="Google Logo" />
+                                <span>Acceder con Google</span>
+                            </button>
+                            <button type="button" class="login-button facebook-button" id="facebookLogin">
+                                <span class="button-icon">
+                                    <img src="public/index_estilos/img/core-img/facebook-770688_1280.webp"
+                                        alt="Facebook Logo" />
+                                </span>
+                                Acceder con Facebook
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="title-wrapper">
+                        <h3>Iniciar sesión</h3>
+                        <p> <b>¡Bienvenido a PlantLink!</b> Recuerda no compartir tu contraseña y cerrar sesión al
+                            terminar. La seguridad de tu cuenta es importante para nosotros.</p>
+                    </div>
+                    <div class="logo-wrapper">
+                        <img src="public/index_estilos/img/core-img/Logo1.png" width="100%">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <label for="email"><b>Correo:</b></label>
+                        <input type="text" id="login-email" class="form-control mb-3" placeholder="tu-email@gmail.com"
+                            required>
+                        <label for="password"><b>Contraseña:</b></label>
+                        <input type="password" id="login-password" class="form-control mb-3" placeholder="tu-contraseña"
+                            required>
+                        <button type="submit" onclick="createUser()" class="btn btn-success w-100 mb-4">Ingresar</button>
+                        <div class="google-signin" style="margin-top: 0px;">
+                            <button type="button" onclick="authGoogle()" id="googleLogin" class="google-signin-button">
+                                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                                    alt="Google Logo" />
+                                <span>Acceder con Google</span>
+                            </button>
+                            <button type="button" onclick="authFacebook()" class="login-button facebook-button" id="facebookLogin">
+                                <span class="button-icon">
+                                    <img src="public/index_estilos/img/core-img/facebook-770688_1280.webp"
+                                        alt="Facebook Logo" />
+                                </span>
+                                Acceder con Facebook
+                            </button>
+
+                        </div>
+                        <!-- <button type="button" class="btn btn-dark" id="githubLogin">Github</button>  
+     <a href="mailto:plantlinkced@gmail.com">-->       
+                            <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#forgot_password" style="color: #084B8A">¿Olvidaste tu contraseña?</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Toastify js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./main.js" type="module"></script>
+
+    <!-- ##### Inicio de Carrusel ##### -->
+    <section class="hero-area">
+        <div class="hero-slides owl-carousel">
+            <!-- Imagen 1 -->
+            <div class="single-hero-slide bg-img" style="background-image: url(public/index_estilos/img/bg6.png);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <h4 data-animation="fadeInUp" data-delay="100ms">Una manera inteligente de monitorear tus plantas
+                                    </h4>
+                                <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenido a <br>PlantLink</h2>
+                                <a href="mailto:plantlinkced@gmail.com" class="btn academy-btn"
+                                    data-animation="fadeInUp" data-delay="700ms">Contactanos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagen 2 -->
+            <div class="single-hero-slide bg-img"
+                style="background-image: url(public/index_estilos/img/bg-img/bg3.png);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12">
+                            <div class="hero-slides-content">
+                                <h4 data-animation="fadeInUp" data-delay="100ms">Una manera inteligente de monitorear tus plantas</h4>
+                                <h2 data-animation="fadeInUp" data-delay="400ms">Bienvenido a <br>PlantLink</h2>
+                                <a href="mailto:plantlinkced@gmail.com" class="btn academy-btn"
+                                    data-animation="fadeInUp" data-delay="700ms">Contactanos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Fin de carrusel ##### -->
+  
+    <div class="modal fade" id="forgot_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="title-wrapper">
+                    <h3>Restablecer contraseña</h3>
+                    <p>Introduce la dirección de correo electrónico asociada a tu cuenta y te enviaremos un correo electrónico para que puedas restablecer tu contraseña.</p>
+                </div>
+                <div class="logo-wrapper">
+                    <img src="public/index_estilos/img/core-img/Logo1.png" width="100%">
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <form onsubmit="event.preventDefault(); resetPassword(document.getElementById('email2').value);">
+                    <label for="email2"><b>Correo:</label>
+                    <input type="email2" id="email2" class="form-control mb-3" placeholder="tu-email@gmail.com"
+                        required>
+                    <button type="submit" class="btn btn-danger">Restablecer contraseña</button>
+                </form>
+                <div id="mensaje"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- ##### Sobre nosotros##### -->
+    <section class="hero-area">
+        <div id="about">
+            <div class="fh5co-heading text-center">
+                <br><br><br>
+                <h3 id="sobre_nosotros" class="fh5co-heading-title">Sobre nosotros <span class="border"></span></h3>
+                <br>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 ">
+
+                        <div class="about-img"><br><img src="public/index_estilos/img/core-img/PlantLink.png"
+                                class="img-responsive" alt=""></div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="about-text">
+                            <br>
+                            <h3>Misión</h3>
+                            <hr>
+                            <p>Implementar la tecnología en la agricultura mediante dispositivos IoT
+                                 y software especializado para ayudar y beneficiar a los agricultores a tener 
+                                 un monitoreo preciso en sus cultivos.  </p>
+                            <h3>Visión</h3>
+                            <hr>
+                            <p>Nuestra visión es ser líderes en el mercado de tecnología para el sector agrícola,
+                                 mejorando continuamente nuestros productos y servicios para satisfacer las necesidades de nuestros clientes.
+                            </p>
+                            <h3>Valores</h3>
+                            <!-- <p>El objetivo de PlantLink es monitorear plantas para mejorar su salud y calidad de vida, permitiendo a los clientes tomar decisiones informadas sobre su cuidado.</p> -->
+                        <p>Innovación, compromiso, responsabilidad e impacto positivo en la sociedad.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ##### PlantLink##### -->
+    <section class="hero-area" id="plantLink">
+        <div id="about">
+            <div class="fh5co-heading text-center">
+                <br><br><br>
+                <h3 class="fh5co-heading-title">PlantLink <span class="border"></span></h3>
+                <br>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 ">
+                        <div class="about-img"><br><img src="public/index_estilos/img/core-img/centinel1.jpeg"
+                                class="img-responsive" alt=""></div>
+                    </div>  
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="about-text">
+                            <br>
+                            <h3>Centinel v1.0</h3>
+                            <hr>
+            
+                            <p>Centinela v1.0 es nuestro dispositivo IoT diseñado para ayudarte a cuidar mejor tus cultivos. Con su capacidad de monitorear en tiempo real la humedad ambiental, 
+                                la temperatura, la humedad del suelo, detectar la intensidad de luz, la concentración de CO2, gas y humo, podrás estar seguro de que tus cultivos están recibiendo
+                                 el ambiente ideal para su crecimiento. </p>
+                            <br>
+                            <p>¡No dejes que tus cultivos sufran más! Con Centinela v1.0, tendrás todo lo que necesitas para garantizar el crecimiento y desarrollo óptimo de tus cultivos. ¡Pídelo ahora mismo!</p>
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <br> <br> <br>
+    <div class="container" id="explore">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
+                    <h3>Registrate en nuestra plataforma</h3>
+                </div>
+            </div>
+        </div>
+
+        <section class="row heroimg breath">
+            <div class="col-md-12 text-center">
+                <img src="public/index_estilos/img/core-img/login333.png" alt="flat-mockup-template">
+            </div>
+        </section>
+    </div>
+
+    <br><br><br>
+    <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
+        <h3>Descarga nuestra aplicación móvil</h3>
+    </div>
+      
+
+    <section class="showcase2">
+        <div class="showcase-wrap2">
+            <div class="texture-overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="device2 wp3">
+                            <div class="device-content2">
+                                <div class="showcase-slider2">
+                                    <ul class="slides" id="showcaseSlider">
+                                        <li>
+                                            <!-- Aquí puedes agregar el contenido de la diapositiva -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <font color="#000000"> <p><b><font color="#000000"> ¡Descubre la revolucionaria aplicación móvil que cambiará la
+                            forma en que cuidas tus cultivos!
+                    </b>Con la aplicación de PlantLink, podrás monitorear en tiempo real las condiciones ambientales de tus cultivos, 
+                    incluyendo la humedad ambiental, la humedad del suelo, la intensidad de luz, la temperatura, así como la concentración
+                     de CO2, gas y humo.  <br><br> Obtén una visión detallada del ambiente de cultivo de tus plantas y toma decisiones informadas para su cuidado. 
+                     <b>¡Descarga ahora nuestra aplicación y transforma la forma en que cuidas tus plantas!</b>    </p>
+                        <blockquote class="team-quote">
+                            <div class="avatar"><img src="public/index_estilos/img/movil/avatarp.png" alt="User Avatar"></div>
+                            <p><b>
+                                <font color="#000000" >"Cultivando el futuro" - PlantLink </font>
+                            </b></p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ##### Final app ##### -->
+    <br><br>
+    <br><br>
+    <script src="https://kit.fontawesome.com/27f43a6674.js" crossorigin="anonymous"></script>
+    <!-- ##### SENSORES ##### -->
+    <div id="servicios">
+        <div id="fh5co-page">
+            <main id="fh5co-main" role="main">
+                <div class="container pb-lg">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="fh5co-heading text-center">
+                                <br><br><br>
+                                <h3 class="fh5co-heading-title">Sensores <span class="border"></span></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fa-sharp fa-solid fa-droplet"></i>
+                                       
+                                    </div>
+                                    <h2>Humedad ambiental </h2>
+                                    <p>Con su sensor capacitivo de humedad y su termistor, el DHT11 es capaz de medir de
+                                        manera precisa
+                                        la temperatura y humedad relativa del aire que lo rodea.</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fa-solid fa-seedling"></i>
+                                    </div>
+                                    <h2>Humedad de la tierra</h2>
+                                    <p>Con su capacidad para detectar la presencia de agua en la tierra, el FC-28
+                                        utiliza la conductividad del
+                                        agua para proporcionar información precisa sobre la humedad del suelo en el que
+                                        crecen tus plantas.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fa-solid fa-temperature-three-quarters"></i>
+                                    </div>
+                                    <h2>Temperatura</h2>
+                                    <p>Con sus sensores resistivos, el DH11 es capaz de medir la humedad relativa en un
+                                        rango amplio,
+                                        desde 20% hasta 90%. Además, puede medir la temperatura en un rango de 0ºC a
+                                        50ºC, proporcionando
+                                        información precisa.</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-cloud"></i>
+                                    </div>
+                                    <h2>CO2</h2>
+                                    <p>El MQ-7 es un sensor de detección de monóxido de carbono que te permite medir la
+                                        concentración de este gas
+                                        en el aire de tu entorno de cultivo. Al detectar la presencia de CO en el
+                                        ambiente, podrás tomar medidas
+                                        preventivas para proteger a tus plantas y asegurarte de que crezcan de manera
+                                        saludable.</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-gas-pump"></i>
+                                    </div>
+                                    <h2>Gas</h2>
+                                    <p>El sensor MQ-7 es un dispositivo semiconductor que ha demostrado ser altamente efectivo para la detección de
+                                         gases peligrosos en el aire. Capaz de detectar concentraciones de monóxido de carbono (CO), así como otros
+                                          gases combustibles como hidrógeno, metano y butanos. </p>
+                                </a>
+                            </div>
+                        </div>
+
+
+                                         
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fa-solid fa-wind"></i>
+                                    </div>
+                                    <h2>Humo</h2>
+                                    <p>Debido a que el humo puede contener partículas de CO, el sensor MQ-7 también puede ser utilizado para detectar humo en el aire.
+                                         Con su capacidad para detectar niveles peligrosos de humo y alertar a los usuarios para que tomen medidas inmediatas de seguridad.</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="fh5co-main-service">
+                                <a href="mailto:plantlinkced@gmail.com" class="fh5co-block-links text-center">
+                                    <div class="icon-circle">
+                                        <i class="fa-solid fa-sun"></i>
+                                    </div>
+                                    <h2>Sensor de luz</h2>
+                                    <p>Más allá de conocer el grado de luz ambiental, este sensor te permite determinar
+                                        si una planta está recibiendo la cantidad adecuada de luz para su crecimiento
+                                        y si necesita ser movida a un lugar con mayor o menor iluminación.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+   
+
+     <div class="top-popular-courses-area section-padding-100-70" id="plagas">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
+                        <h3>Consejos para cuidar tus plantas</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+       
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="400ms">
+                        <div class="popular-course-content">
+                            <h5><b>Conoce tus plantas</b></h5>
+
+                            <p>  Cada planta es única y tiene sus propias necesidades. Investiga sobre las condiciones de luz, 
+                                temperatura, humedad y riego adecuadas para el tipo de planta que tienes y adapta el cuidado en 
+                                consecuencia. </p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons01.png);">
+                        </div>
+                    </div>
+                </div>
+
+
+           <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="500ms">
+                        <div class="popular-course-content">
+                            <h5><b>Exposición a la luz</b></h5>
+                            <p>
+                                Las plantas necesitan luz para crecer, pero es importante controlar la cantidad y la calidad de la luz a la que están expuestas.
+                                 Algunas plantas necesitan luz solar directa, mientras que otras prefieren la sombra. </p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons_luz.png);">
+                        </div>
+                    </div>
+                </div>
+            
+                 <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="700ms">
+                        <div class="popular-course-content">
+                            <h5><b>No te excedas con el riego</b></h5>
+                            <p>Aunque el riego es esencial para el crecimiento de las plantas, es importante no excederse ya que el exceso de agua puede ahogar las raíces y provocar la muerte de la planta. </p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons_riego.png);"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="700ms">
+                        <div class="popular-course-content">
+                            <h5><b>Un ambiente adecuado</b></h5>
+                            <p>Las plantas necesitan un ambiente adecuado para crecer y desarrollarse. Asegúrate de mantener una temperatura y humedad adecuadas, evita exponerlas a corrientes de aire y protege las plantas. </p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons02.png);"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="700ms">
+                        <div class="popular-course-content">
+                            <h5><b>Señales de tu planta</b></h5>
+                            <p>Las plantas envían señales cuando algo no está bien. Presta atención a la apariencia de las hojas, el tallo y las raíces. Por ejemplo, hojas amarillentas pueden indicar falta de nutrientes o exceso de agua, mientras que hojas secas pueden ser señal de falta de humedad.</p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons_muerta.png);"></div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                        data-wow-delay="700ms">
+                        <div class="popular-course-content">
+                            <h5><b>Calidad de aire</b></h5>
+                            <p>Es importante mantener a tus plantas alejadas de áreas con mucho tráfico o exposición al humo y gas. Estos contaminantes pueden dañar la salud de tus plantas y reducir su crecimiento.Además, asegúrate de revisar regularmente el sensor de gas y humo. </p>
+                        </div>
+                        <div class="popular-course-thumb bg-img"
+                            style="background-image: url(public/index_estilos/img/Consejos/Cons03.png);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 class="fh5co-heading-title">Próximas actualizaciones <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/core-img/Proximamente.png"
+                            class="img-responsive" alt=""></div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>CropGuardian v1.0</h3>
+                        <hr>
+        
+                        <p><b>¡No dejes que las plagas arruinen tus cultivos!</b> Con nuestro nuevo dispositivo IoT equipado con un sensor ultrasonico, podrás detectar fácilmente la presencia de mosca blanca, 
+                            mosca de la fruta, polilla del tomate, mariposa del racimo y saltamontes en tus plantas. Nuestro sensor detecta las frecuencias ultrasonicas producidas por estos insectos, lo que te permite tomar medidas preventivas a tiempo.  </p>
+                        <br>
+                        <p>Además, también podrás detectar la tala de árboles y contribuir a la conservación del medio ambiente.<b>¡Asegura la salud de tus cultivos y solicita nuestro dispositivo IoT ahora mismo!</b> </p>
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+          
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>ForestHeart V1.0</h3>
+                        <hr>
+        
+                        <p><b>¡Únete a nosotros en la lucha por la conservación y gestión sostenible de los bosques!</b> Nuestro dispositivo equipado
+                             con sensores de CO2, calidad de aire y detectores infrarrojos, puede detectar y prevenir la propagación de
+                              incendios forestales. Además, gracias a los sensores sónicos que detectan el sonido de las motosierras, podemos
+                               notificar de manera inmediata el lugar del registro de tala ilegal. </p>
+                        <br>
+                        <p>Con nuestro dispositivo IoT, no solo podemos prevenir la deforestación, sino también monitorear la salud del bosque y prevenir la propagación de plagas y enfermedades.<b> ¡Juntos podemos proteger nuestros bosques y asegurar un futuro sostenible para las generaciones venideras!</b></p>
+                     
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/core-img/Proximamente.png"
+                            class="img-responsive" alt=""></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<br><br>
+
+<div class="top-popular-courses-area section-padding-100-70" id="plagas">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
+                    <h3>Detecciones de nuestro dispositivo</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+   
+            <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="400ms">
+                    <div class="popular-course-content">
+                        <h5><b>Mosca blanca</b></h5>
+
+                        <p>Esta plaga ataca principalmente a plantas ornamentales y hortalizas. Las moscas blancas se alimentan de la savia de las plantas, lo que puede debilitarlas y provocar su muerte. Los daños incluyen la decoloración de las hojas y la aparición de manchas pegajosas en ellas. </p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/moscaBlanca.png);">
+                    </div>
+                </div>
+            </div>
+
+
+       <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="500ms">
+                    <div class="popular-course-content">
+                        <h5><b>Mosca de la fruta</b></h5>
+                        <p>Esta plaga afecta a frutas como melones, manzanas, peras y cítricos. Las larvas se alimentan del interior de la fruta, lo que puede provocar su descomposición y pudrición. Los daños incluyen la aparición de agujeros en la fruta y la disminución en su calidad </p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/moscoFruta.png);">
+                    </div>
+                </div>
+            </div>
+        
+             <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="700ms">
+                    <div class="popular-course-content">
+                        <h5><b>Polilla del tomate</b></h5>
+                        <p>Esta plaga ataca principalmente a los tomates. Las larvas se alimentan de los frutos, lo que puede provocar su descomposición y pudrición. Los daños incluyen la aparición de agujeros en los tomates y la disminución en su calidad. </p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/tomate.png);"></div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="700ms">
+                    <div class="popular-course-content">
+                        <h5><b>Mariposa del racimo</b></h5>
+                        <p>Esta plaga afecta a las uvas. Las larvas se alimentan de los racimos de uvas, lo que puede provocar su descomposición y pudrición. Los daños incluyen la aparición de agujeros en los racimos de uvas y la disminución en su calidad. </p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/racimo.png);"></div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="700ms">
+                    <div class="popular-course-content">
+                        <h5><b>Saltamontes</b></h5>
+                        <p>Esta plaga afecta a una amplia variedad de plantas. Los saltamontes se alimentan de las hojas y tallos de las plantas, lo que puede debilitarlas y provocar su muerte. Los daños incluyen la aparición de agujeros en las hojas y la disminución en su crecimiento.</p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/saltamonte.png);"></div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp"
+                    data-wow-delay="700ms">
+                    <div class="popular-course-content">
+                        <h5><b>Detección motosierra</b></h5>
+                        <p> Utilizando sensores especiales, podemos detectar la presencia de sonidos y vibraciones que son producidos durante el proceso de tala. Al alertar a los usuarios sobre la tala de árboles en tiempo real, podemos fomentar prácticas sostenibles. </p>
+                    </div>
+                    <div class="popular-course-thumb bg-img"
+                        style="background-image: url(public/index_estilos/img/Plagas/tala.png);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="fh5co-heading text-center">
+        <h3 class="fh5co-heading-title">Comentarios <span class="border"></span></h3>
+    </div>
+
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v16.0&appId=135940782502754&autoLogAppEvents=1" 
+ nonce="o9LFhsju"></script>
+ <div class="fb-comments" data-href="https://dbsensors.web.app/index.html" data-width="100%" data-numposts="100"></div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    
+    <footer>
+        <div class="contenedor" id="contacto">
+            <section class="contacto">
+                <div class="fh5co-heading text-center">
+                    <h3 class="fh5co-heading-title">Contacto <span class="border"></span></h3>
+                </div>
+                <!-- Agrega el formulario con los campos requeridos -->
+            <form class="formulario" id="miFormulario" >
+                <input type="name" placeholder="Nombre" name="name" id="name" required>
+                <input type="email" placeholder="Correo" name="email" id="email" required>
+                <input type="text" placeholder="Número de teléfono" name="phone" id="phone" required>
+                <textarea name="message" id="message" placeholder="¿Qué desea solicitar?:" required></textarea>
+                <input class="boton" type="submit" value="Enviar">
+            </form>
+            </section>
+        </div>
+
+        <section class="redes-sociales">
+            <div class="contenedor">
+                <a class="facebook" href="https://www.facebook.com/profile.php?id=100089869691089" target="_blank"><i
+                        class="fa fa-facebook"></i></a>
+                <a class="instagram" href="https://www.instagram.com/plantlinkced/?next=%2F" target="_blank"><i
+                        class="fa fa-instagram"></i></a>
+            </div>
+        </section>
+    </footer>
+
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="public/index_estilos/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="public/index_estilos/js/bootstrap/popper.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="public/index_estilos/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="public/index_estilos/js/active.js"></script>
+    <script src="public/index_estilos/js/jquery.cbpQTRotator.min.js"></script>
+    <!-- Movil -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="public/index_estilos/js/waypoints.min_movil.js"></script>
+    <script src="public/index_estilos/js/min/scripts-min_movil.js"></script>
+    
+    <script src="./app/index.js"></script>
+    <script src="./app/firebasebd.js"></script>
+    <script src="./app/login.js"></script>
+    
+
+
+</body>
+</html>

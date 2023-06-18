@@ -1,0 +1,588 @@
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantLink- Perfil</title>
+    <!-- BOOSTRAP CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Scripts de la frase -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- Title -->
+    <title>PlantLink</title>
+    <link rel="stylesheet" href="public/index_estilos/css/themify-icons.css">
+    <!-- Imagen pestaña -->
+    <link rel="icon" href="public/index_estilos/img/core-img/Logo_sin.png">
+    <link rel="stylesheet" href="index_estilos/css/themify-icons2.css">
+    <!-- Estilo del menu -->
+    <link rel="stylesheet" href="public/index_estilos/style.css">
+    <link rel="stylesheet" href="public/index_estilos/css/styles_movil.css">
+    <link rel="stylesheet" href="public/index_estilos/css/animate.css">
+     <!-- SweetAlert2 -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.js"></script>
+      <!-- Firebase -->
+     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+ 
+    <style>
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .title-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 75%;
+        }
+
+        .logo-wrapper img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal-header h3,
+        .modal-header p {
+            margin: 0;
+        }
+
+        .modal-header p {
+            font-size: 0.9em;
+        }
+
+        .modal-header h3 {
+            color: rgb(13, 8, 88);
+        }
+
+        .button-container {
+            text-align: right;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+
+
+
+<div class="button-container">
+    <button id="btnLogout" class="btn btn-danger">Cerrar sesión</button>
+</div>
+<script type="module" src="./app/logout2.js"></script>
+<script type="module" src="./app/firebase.js"></script>
+
+<!-- ##### Inicio de Header  ##### -->
+<header class="header-area">
+    <!-- Inicio de Menu -->
+    <div class="academy-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="academyNav">
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="classy-menu">
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="#acerca">Acerca de</a></li>
+                                <li><a class="nav-link logged-out" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#conectar1">Conectar</a></li>
+                                <li><a href="#manual">Manual de usuario</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Numero de telefono -->
+                    <div class="calling-info">
+                        <div class="call-center">
+                            <a href="tel:+522411980152"><i class="icon-telephone-2"></i> <span>(+52) 241 198 01
+                                    52</span></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Fin de Menu ##### -->
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <ul class="list-group posts">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 1 -->
+<div class="modal fade bd-example-modal-lg" id="conectar1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="title-wrapper">
+                <h3>Terminos y condiciones</h3>
+                <p> <b>¡Bienvenido a PlantLink!</b>Al utilizar el dispositivo IoT de monitoreo de calidad del aire y
+                     suelo, el sitio web y la aplicación móvil, usted acepta estos términos y condiciones. 
+                     Si no está de acuerdo con estos términos, no use el dispositivo, el sitio web y la aplicación móvil.
+                    </p>
+            </div>
+            <div class="logo-wrapper">
+                <img src="public/index_estilos/img/core-img/Logo1.png" width="100%">
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h5>Propiedad intelectual</h5>
+            <P>El dispositivo, el sitio web y la aplicación móvil son propiedad intelectual exclusiva de la empresa.
+                 Usted acepta no utilizar, copiar o distribuir el contenido de nuestro sitio web o aplicación móvil sin 
+                 nuestro permiso previo y por escrito.</P>
+            <h5>Privacidad</h5>
+                 <P>Nos comprometemos a proteger su privacidad y seguridad en línea. La información que recolectamos se
+                     utilizará únicamente para mejorar la calidad del servicio y no se compartirá con terceros sin su 
+                     consentimiento.</P>
+            <h5>Responsabilidad</h5>
+                     <P>No somos responsables de ningún daño o pérdida que pueda surgir del uso del dispositivo, 
+                        sitio web o aplicación móvil. Usted acepta utilizar estos servicios bajo su propio riesgo.</P>
+            <h5>Uso aceptable</h5>
+                        <P>Usted acepta no utilizar el dispositivo, sitio web o aplicación móvil para fines ilegales o 
+                            para violar los derechos de terceros. Nos reservamos el derecho de cancelar el acceso a nuestro 
+                            dispositivo, sitio web o aplicación móvil si consideramos que está utilizando nuestros servicios 
+                            de manera inapropiada.</P>
+           <h5>Actualizaciones y cambios</h5>
+                            <P>Nos reservamos el derecho de actualizar y cambiar estos términos y condiciones en cualquier
+                                 momento. Se espera que verifique esta página regularmente para estar al tanto de los cambios.</P>
+            <h5>Contacto</h5>
+                                 <P>Si tiene alguna pregunta o comentario sobre estos términos y condiciones, no dude en ponerse en contacto con nosotros a través de nuestro sitio web o aplicación móvil.
+
+                                    Gracias por elegir nuestro dispositivo IoT de monitoreo de calidad del aire, suelo y plagas. Esperamos que lo disfrute y que le ayude a mantener sus cultivos saludables y protegidos
+                                    </P>
+                
+        </div>
+        <div class="modal-footer">    
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#conectar2" data-dismiss="modal">Aceptar</button>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="conectar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="title-wrapper">
+                <h3>Conectar</h3>
+                <p> <b>¡Bienvenido a PlantLink!</b> Para comenzar a disfrutar de todos los beneficios de PlantLink,
+                    necesitamos que ingreses el IDE de tu dispositivo en nuestra página. Una vez vinculado, tendrás
+                    acceso a información detallada sobre tus plantas.</p>
+
+            </div>
+            <div class="logo-wrapper">
+                <img src="public/index_estilos/img/core-img/Logo1.png" width="100%">
+
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="login-form">
+                <label for="id"><b>ID:</b></label>
+                <input type="text" id="id" name="id" class="form-control mb-3" placeholder="tu-id"
+                    required>
+                <!-- <button type="submit" class="btn btn-success w-100 mb-4">Ingresar</button> -->
+                <button type="button" class="btn btn-success w-100 mb-4" onclick="autenticar()">Ingresar</button>
+
+            </form>
+
+
+        </div>
+    
+    </div>
+</div>
+</div>
+</div> 
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Toastify js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="./main.js" type="module"></script>
+
+
+
+
+
+<div>
+    <h1 id="user-email"></h1>
+  </div>
+
+
+
+
+
+
+
+
+
+<!-- ##### Sobre nosotros##### -->
+<section class="hero-area">
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="acerca" class="fh5co-heading-title">PlantLink <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+
+                    <div class="about-img"><br><img src="public/index_estilos/img/core-img/plant.png"
+                            class="img-responsive" alt=""></div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>¡Bienvenido a PlantLink!</h3>
+                        <hr>
+                        <p>PlantLink fue elaborado de manera independiente con el objetivo de ser una empresa dedicada al control de plagas, a través de técnicas innovadoras de alta calidad, tecnología y costos competitivos. Con nuestra solución podrás disfrutar de un ambiente saludable para tus plantas y una forma fácil y efectiva de monitorear su salud y crecimiento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section class="hero-area">
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">Mantenimiento <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/mantess.png" class="img-responsive" alt=""></div> 
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Mantenimiento preventivo de software </h3>
+                        <hr>
+                        <p>Nuestro mantenimiento preventivo de software nos permite mirar hacia el futuro y hacer los
+                            cambios
+                            necesarios para garantizar que nuestro software funcione como se desea durante el mayor
+                            tiempo
+                            posible. Además, nuestro mantenimiento perfectivo de software tiene como objetivo ajustar el
+                            software agregando nuevas características según sea necesario y eliminando características
+                            que
+                            son irrelevantes o no efectivas en el software dado, lo que mantiene el software relevante a
+                            medida que el mercado y las necesidades del usuario cambian.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Mantenimiento preventivo del dispositivo </h3>
+                        <hr>
+                        <p>Realizamos mantenimiento continuo en nuestro hardware para asegurarnos de que siempre esté actualizado y funcione de manera óptima. Nuestro objetivo es ofrecer los mejores precios a nuestros clientes, mejorando la calidad del hardware mediante la implementación de mejoras continuas.                   </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/manted.png" class="img-responsive" alt=""></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section class="hero-area">
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">Seguridad <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                   <div class="about-img"><br><img src="public/index_estilos/img/seguridadS.png" class="img-responsive" alt=""></div> 
+
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Seguridad del software </h3>
+                        <hr>
+                        <p> Para garantizar la protección de nuestros sistemas informáticos, implementamos contraseñas seguras y confiables que cumplen con los requisitos de nuestra
+                              organización. Esto abarca todas las contraseñas utilizadas en el sistema, incluyendo cuentas de usuario y servicios de red. 
+                              </p>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Seguridad del dispositivo </h3>
+                        <hr>
+                        <p>Nuestro dispositivo utiliza el protocolo UART y MQTT para transmitir paquetes de datos. Esto garantiza una alta encriptación de los datos,
+                             así como una comunicación peer-to-peer segura en lenguaje binario. Además, al no requerir cuentas de usuario para su uso, nuestro dispositivo
+                              reduce la exposición de la información del usuario a un ID único por dispositivo.  </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/seguridadH.png" class="img-responsive" alt=""></div> 
+ 
+                 </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="hero-area">
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">Requisitos <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                  <div class="about-img"><br><img src="public/index_estilos/img/requS.png" class="img-responsive" alt=""></div> 
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Requisitos del software </h3>
+                        <hr>
+                        <p> Nos enorgullece ofrecerte una experiencia de monitoreo de plantas de la manera más fácil y
+                            accesible posible. Nuestra página web es compatible con cualquier navegador, lo que
+                            significa
+                            que no importa si usas Google Chrome, Firefox, Safari o cualquier otro, podrás acceder y
+                            visualizar
+                            el monitoreo de tus plantas sin problemas.
+                        </p><br>
+                        <P>Además, nuestra aplicación móvil es compatible con el sistema operativo Android, lo que te
+                            permite
+                            monitorear tus plantas en cualquier momento y en cualquier lugar desde la comodidad de tu
+                            dispositivo móvil.
+                            Todo lo que necesitas es una conexión estable a internet para que puedas estar siempre
+                            informado sobre la
+                            calidad del aire y tierra.</P>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Requisitos del dispositivo </h3>
+                        <hr>
+                        <p>A pesar de que nuestro dispositivo opera con la tecnología LoRaWAN, su Gateway requiere un punto de acceso a 
+                            Internet para enviar de forma segura los datos a nuestra base de datos. Por lo tanto, es necesario ingresar la red 
+                            y la contraseña de una señal estable. Además, nuestros dispositivos son muy intuitivos y solo requieren el suministro
+                             de energía para funcionar activamente.                     </p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="about-img"><br><img src="public/index_estilos/img/reqH.png" class="img-responsive" alt=""></div> 
+                  </div>
+  
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section class="hero-area">
+    <div id="about">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">Garantia <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                     <div class="about-img"><br><img src="public/index_estilos/img/mante.png" class="img-responsive" alt=""></div> 
+
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <br>
+                        <h3>Garantia </h3>
+                        <hr>
+                        <p> Plantlink se compromete a ofrecer productos de alta calidad. Por eso, cualquier persona que compre un dispositivo Centinel v1.0 tendrá derecho a un año de garantía. La garantía se ofrece para reemplazar inmediatamente el dispositivo en caso de cualquier defecto eléctrico o de diseño, para asegurar que los clientes reciban el nivel de calidad de servicio que merecen.     </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+
+<section class="hero-area">
+    <div id="manual">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">Manual de usuario <span class="border"></span></h3>
+            <br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <h3>Dispositivo</h3>
+                    <iframe src="https://drive.google.com/file/d/1zCGXGkDYVLG5gtJqNEYznp2XtUkyxI5S/preview" width="500"
+                        height="300" allow="autoplay"></iframe>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <h3>Aplicación Móvil</h3>
+                        <iframe src="https://drive.google.com/file/d/19bC87MWu-pFp6-tFvuW0OklyzGgYM6WX/preview"
+                            width="500" height="300" allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <center>
+                <h3>Pagina web</h3>
+                <iframe src="https://drive.google.com/file/d/1Ll6KCpbpjYyDm0CyIjnCh1itLxTjhwdL/preview" width="500"
+                    height="300" allow="autoplay"></iframe>
+            </center>
+        </div>
+    </div>
+    </div>
+</section>
+<section class="hero-area">
+    <div id="manual">
+        <div class="fh5co-heading text-center">
+            <br><br><br>
+            <h3 id="sobre_nosotros" class="fh5co-heading-title">¿Dónde contactarnos? <span class="border"></span></h3>
+            <br>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <center>
+                        <h3>Telefono:</h3>
+                        <a href="tel:+522411980152"><img href="2411980152"
+                                src="./public/index_estilos/img/core-img/phone.png" width="40%" height=""></a>
+                        <br><br>
+                        <h3>Facebook</h3>
+                        <a href="https://www.facebook.com/profile.php?id=100089869691089"><img
+                                src="./public/index_estilos/img/core-img/facebook.png" width="40%" height=""></a>
+                    </center>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <center>
+                            <h3>Correo</h3>
+                            <a href="mailto:plantlinkced@gmail.com"><img
+                                    src="./public/index_estilos/img/core-img/correo2.png" width="40%" height=""></a>
+                            <br><br>
+                            <h3>Instagram</h3>
+                            <a href="https://www.instagram.com/plantlinkced/?next=%2F"><img
+                                    src="./public/index_estilos/img/core-img/insta.png" width="40%" height=""></a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="public/index_estilos/js/jquery/jquery-2.2.4.min.js"></script>
+
+<!-- Popper js -->
+<script src="public/index_estilos/js/bootstrap/popper.min.js"></script>
+<!-- All Plugins js -->
+<script src="public/index_estilos/js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="public/index_estilos/js/active.js"></script>
+<script src="public/index_estilos/js/jquery.cbpQTRotator.min.js"></script>
+<!-- Movil -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="public/index_estilos/js/waypoints.min_movil.js"></script>
+<script src="public/index_estilos/js/min/scripts-min_movil.js"></script>
+
+
+<script>
+    // Configura Firebase con tus credenciales
+    var firebaseConfig = {
+      apiKey: "AIzaSyCG-8m86VO_aB9kJPkI4xIaa8SMGCYHTCg",
+  authDomain: "dbsensors.firebaseapp.com",
+  databaseURL: "https://dbsensors-default-rtdb.firebaseio.com",
+  projectId: "dbsensors",
+  storageBucket: "dbsensors.appspot.com",
+  messagingSenderId: "1013519019759",
+  appId: "1:1013519019759:web:75e854d8032128304e751a",
+  measurementId: "G-YD2HFMLCKP"
+    };
+    firebase.initializeApp(firebaseConfig);
+  
+    // Función para autenticar el ID ingresado por el usuario
+    function autenticar() {
+      console.log("La función autenticar se está ejecutando");
+     const id = document.getElementById('id').value;
+      const idCollection = firebase.firestore().collection('id');
+      idCollection.doc(id).get()
+        .then((doc) => {
+          if (doc.exists) {
+               window.location.href = 'sensores.html';
+          } else {
+            // Si el documento no existe, significa que el ID es incorrecto
+          Swal.fire({
+          icon: 'error',
+          title: (`El ID ${id} NO es válido`),
+    }); 
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  </script>
+
+
+</html>

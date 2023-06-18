@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario de contacto</title>
+	<!-- Agrega los archivos necesarios de Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.4/sweetalert2.min.js"></script>
+
+</head>
+<body>
+	<h1>Formulario de contacto</h1>
+	<!-- Agrega el formulario con los campos que quieras recolectar -->
+	<form class="formulario" id="miFormulario" >
+		<input type="name" placeholder="Nombre" name="name" id="name" required>
+		<input type="email" placeholder="Correo" name="email" id="email" required>
+		<input type="text" placeholder="Número de teléfono" name="phone" id="phone" required>
+		<textarea name="message" id="message" placeholder="¿Qué desea solicitar?:" required></textarea>
+		<input class="boton" type="submit" value="Enviar">
+	</form>
+	<!-- Agrega el script que agrega los datos del formulario a Firestore -->
+	<script>
+
+var firebaseConfig = {
+	    apiKey: "AIzaSyCG-8m86VO_aB9kJPkI4xIaa8SMGCYHTCg",
+	    authDomain: "dbsensors.firebaseapp.com",
+	    databaseURL: "https://dbsensors-default-rtdb.firebaseio.com",
+	    projectId: "dbsensors",
+	    storageBucket: "dbsensors.appspot.com",
+	    messagingSenderId: "1013519019759",
+	    appId: "1:1013519019759:web:75e854d8032128304e751a",
+	    measurementId: "G-YD2HFMLCKP"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  var db = firebase.firestore();
+
+	  const form = document.querySelector('.formulario');
+	  form.addEventListener('submit', (e) => {
+	    e.preventDefault();
+	    db.collection('contactos').add({
+	      name: form.name.value,
+	      email: form.email.value,
+	      phone: form.phone.value,
+	      message: form.message.value
+	    })
+	
+
+        .then(() => {
+            Swal.fire({
+        title: '¡Gracias por contactarnos!',
+        //icon: 'success',
+        imageUrl: 'public/index_estilos/img/core-img/plantlink_logo33.png',
+        imageHeight: 200,
+       
+      });
+  form.reset();
+})
+	    .catch((error) => {
+            Swal.fire({
+    icon: 'error',
+    title: 'Ocurrió un error al enviar tu mensaje. Por favor, intenta de nuevo más tarde.',
+    text: 'PlantLink',
+  });
+	      console.error('Error al agregar los datos a Firestore: ', error);
+	
+	    });
+	  });
+	</script>
+
+<button onclick="abrirAlerta()">Abrir alerta</button>
+
+<script>
+    function abrirAlerta() {
+        Swal.fire({
+    icon: 'error',
+    title: 'Ocurrió un error al enviar tu mensaje.',
+
+  });
+    }
+  </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

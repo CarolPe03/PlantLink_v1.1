@@ -1,0 +1,56 @@
+/* ==========================================================================
+Showcase
+========================================================================== */
+
+.showcase2 {
+    background: url('../img/m2.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .device2 {
+    position: absolute;
+    top: -60px;
+    left: 20%;
+    min-height: 676px;
+    width: 359px;
+    background: url('../img/movil/movil.png') no-repeat center center;
+  }
+  
+  .showcase-wrap2 {
+    position: relative;
+    padding: 100px 0;
+    min-height: 600px;
+  }
+  
+  .showcase-slider2 ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .showcase-slider2 .flickity-page-dots2 {
+    bottom: 20px;
+  }
+  
+  /* Responsive CSS */
+  
+  @media (max-width: 767px) {
+    .device2 {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .device2 {
+      position: absolute;
+      top: -60px;
+      left: 20%;
+      min-height: 676px;
+      width: 359px;
+      background: url('../img/movil/movil.png') no-repeat center center;
+    }
+  }

@@ -1,0 +1,47 @@
+Date : 2023-04-14 17:13:50
+Directory : d:\PlantLink
+Total : 11 files,  -72332 codes, -20 comments, -1648 blanks, all -74000 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          6 |        -42 |        -16 |         -8 |        -66 |
+| SVG        |          1 |     -1,530 |          0 |          0 |     -1,530 |
+| CSS        |          2 |     -5,068 |         -2 |         -6 |     -5,076 |
+| HTML       |          1 |    -24,502 |         -2 |     -1,634 |    -26,138 |
+| JSON       |          1 |    -41,190 |          0 |          0 |    -41,190 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                      | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                         |         11 |    -72,332 |        -20 |     -1,648 |    -74,000 |
+| src                                                       |         11 |    -72,332 |        -20 |     -1,648 |    -74,000 |
+| src\public                                                |         11 |    -72,332 |        -20 |     -1,648 |    -74,000 |
+| src\public\fonts                                          |          6 |    -72,318 |         -4 |     -1,643 |    -73,965 |
+| src\public\fonts\icomoon                                  |          6 |    -72,318 |         -4 |     -1,643 |    -73,965 |
+| src\public\fonts\icomoon (Files)                          |          3 |    -70,606 |         -4 |     -1,638 |    -72,248 |
+| src\public\fonts\icomoon\demo-files                       |          2 |       -182 |          0 |         -5 |       -187 |
+| src\public\fonts\icomoon\fonts                            |          1 |     -1,530 |          0 |          0 |     -1,530 |
+| src\public\js                                             |          5 |        -14 |        -16 |         -5 |        -35 |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                  | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\PlantLink\src\public\fonts\icomoon\demo-files\demo.css | CSS        |       -154 |          0 |         -2 |       -156 |
+| d:\PlantLink\src\public\fonts\icomoon\demo-files\demo.js  | JavaScript |        -28 |          0 |         -3 |        -31 |
+| d:\PlantLink\src\public\fonts\icomoon\demo.html           | HTML       |    -24,502 |         -2 |     -1,634 |    -26,138 |
+| d:\PlantLink\src\public\fonts\icomoon\fonts\icomoon.svg   | SVG        |     -1,530 |          0 |          0 |     -1,530 |
+| d:\PlantLink\src\public\fonts\icomoon\selection.json      | JSON       |    -41,190 |          0 |          0 |    -41,190 |
+| d:\PlantLink\src\public\fonts\icomoon\style.css           | CSS        |     -4,914 |         -2 |         -4 |     -4,920 |
+| d:\PlantLink\src\public\js\bootstrap.min.js               | JavaScript |         -1 |         -6 |          0 |         -7 |
+| d:\PlantLink\src\public\js\jquery-3.3.1.min.js            | JavaScript |         -1 |         -1 |          0 |         -2 |
+| d:\PlantLink\src\public\js\main.js                        | JavaScript |         -9 |          0 |         -5 |        -14 |
+| d:\PlantLink\src\public\js\owl.carousel.min.js            | JavaScript |         -2 |         -5 |          0 |         -7 |
+| d:\PlantLink\src\public\js\popper.min.js                  | JavaScript |         -1 |         -4 |          0 |         -5 |
+| Total                                                     |            |    -72,332 |        -20 |     -1,648 |    -74,000 |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+

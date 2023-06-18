@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Registro de usuario con Firebase</title>
+	<!-- Agrega la librería de Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+	<!-- Configuración de Firebase -->
+	<script>
+		var firebaseConfig = {
+      apiKey: "AIzaSyCG-8m86VO_aB9kJPkI4xIaa8SMGCYHTCg",
+  authDomain: "dbsensors.firebaseapp.com",
+  databaseURL: "https://dbsensors-default-rtdb.firebaseio.com",
+  projectId: "dbsensors",
+  storageBucket: "dbsensors.appspot.com",
+  messagingSenderId: "1013519019759",
+  appId: "1:1013519019759:web:75e854d8032128304e751a",
+  measurementId: "G-YD2HFMLCKP"
+		};
+		// Inicializa Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
+</head>
+<body>
+	<h1>Registro de usuario con Firebase</h1>
+	<form id="registro-formulario">
+		<label for="correo-electronico">Correo electrónico:</label>
+		<input type="email" id="correo-electronico" name="correo-electronico" required><br>
+		<label for="contraseña">Contraseña:</label>
+		<input type="password" id="contraseña" name="contraseña" minlength="6" required><br>
+		<button type="submit">Registrarse</button>
+	</form>
+
+	<!-- Agrega el código de JavaScript -->
+	<script>
+// Obtiene el formulario de registro
+const registroFormulario = document.getElementById('registro-formulario');
+
+// Agrega un listener al evento submit del formulario
+registroFormulario.addEventListener('submit', (event) => {
+    event.preventDefault();
+    // Obtiene el correo electrónico y la contraseña ingresados por el usuario
+    const correoElectronico = registroFormulario['correo-electronico'].value;
+    const contraseña = registroFormulario['contraseña'].value;
+    // Crea una cuenta de usuario en Firebase con el correo electrónico y la contraseña
+    firebase.auth().createUserWithEmailAndPassword(correoElectronico, contraseña)
+    .then((userCredential) => {
+        // Si la cuenta de usuario se creó exitosamente, envía un correo electrónico de verificación al usuario
+        userCredential.user.sendEmailVerification()
+        .then(() => {
+            // Si el correo electrónico de verificación se envió exitosamente, redirige al usuario a la página de inicio
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user && user.emailVerified) {
+                    window.location.href = "perfil.html";
+                } else {
+                    alert("Por favor verifique su dirección de correo electrónico antes de continuar.");
+                }
+            });
+        })
+        .catch((error) => {
+            console.error('Error al enviar el correo electrónico de verificación', error);
+        });
+    })
+    .catch((error) => {
+        console.error('Error al crear la cuenta de usuario', error);
+    });
+});
+
+	</script>
+</body>
+</html>
